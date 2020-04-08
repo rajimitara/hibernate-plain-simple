@@ -1,5 +1,7 @@
 package com.foody.swiggy.model;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,12 +10,13 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE , generator = "table_key_generator")
+    @TableGenerator(name = "table_key_generator",table = "ifinances_keys", pkColumnName = "PK_NAME",valueColumnName = "PK_VALUE")
     @Column(name="USER_ID")
     private Long userId;
 
-    @Column(name="FIRST_NAME")
-    private String firstName;
+    @Column(name="FIRST_NAME",nullable = false)
+    private String firstName; //pushing db constraint up to hibernate in middleware
 
     @Column(name="LAST_NAME")
     private String lastName;
@@ -35,7 +38,6 @@ public class User {
 
     @Column(name="CREATED_BY")
     private String createdBy;
-
 
     public Long getUserId() {
         return userId;

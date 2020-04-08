@@ -1,5 +1,6 @@
 package com.foody.swiggy;
 
+import com.foody.swiggy.model.Budget;
 import com.foody.swiggy.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -16,6 +17,7 @@ public class HibernateUtil {
         try{
             Configuration configuration = new Configuration();
             configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Budget.class);
             return  configuration.buildSessionFactory(new StandardServiceRegistryBuilder().build());
         }catch (Exception e){
             e.printStackTrace();
